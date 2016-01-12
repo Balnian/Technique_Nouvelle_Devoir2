@@ -99,6 +99,28 @@ pair<T, T> plus_longue_sequence(T debut, T fin)
 	return make_pair(currdeb, currfin);
 }
 
+template<class T, class U>
+pair<T, T> plus_longue_sequence(T debut, T fin, U pred)
+{
+	T currdeb = fin;
+	T currfin = fin;
+	auto currelem = debut;
+	while (debut != fin) {
+		if (distance(debut, currelem = find_if(debut, fin, [&](auto p) {return !pred(p); })) > distance(currdeb, currfin))
+		{
+			currdeb = debut;
+			currfin = currelem;
+
+		}
+		if (currelem == debut)
+			debut = next(currelem);
+		else
+			debut = currelem;
+	}
+
+	return make_pair(currdeb, currfin);
+}
+
 //template<class T, class U>
 //pair<T, T> plus_longue_sequence(T debut, T fin,U pred)
 //{
@@ -134,50 +156,33 @@ pair<T, T> plus_longue_sequence(T debut, T fin)
 //   return make_pair(LongestITbegin, LongestITend);
 //}
 
-string merge(vector<string> s1, vector<string> s2)
-{
-	int n = (s1.size() > s2.size()) ? s2.size() : s1.size();
-	string out="";
-	for (size_t i = 0; i < n; i++)
-	{
-		out += s1.at(i) + s2.at(i);
-	}
-	/*for (size_t i = 0; i < s1.size()-n-1; i++)
-	{
-		out += s1.at(i+1);
-	}
-	for (size_t i = 0; i < s2.size() - n-1; i++)
-	{
-		out += s2.at(i+1);
-	}*/
-	return out;
-}
 
 string inverser_mots(string s)
 {
-	vector<string> str;
-	vector<string> space;
+	vector<string> str, space;
 
-	auto debut = begin(s);
-	auto fin = end(s);
-
-
-
+	auto debut = begin(s), fin = end(s);
+	//Sépare les string et les espaces
 	while (debut != fin)
 	{
-		auto t = find_if(debut,fin, [](char c) {return !isspace(c, locale{ "" }); });
+		auto t = find_if(debut, fin, [](char c) {return !isspace(c, locale{ "" }); });
 		//if(debut!=t)
-			space.emplace_back(string(debut, t));
+		space.emplace_back(string(debut, t));
+
 		auto t2 = find_if(t, fin, [](char c) {return isspace(c, locale{ "" }); });
 
 		str.emplace_back(string(t, t2));
 		debut = t2;
 	}
+	//reverse les mots
+	str.erase(std::remove_if(begin(str), end(str), [](string s) { return s.empty(); }), end(str));
 	std::reverse(begin(str), end(str));
-	
-	return merge(space, str);
 
+	string out = "";
+	for (size_t i = 0; i < str.size(); i++) { out += space.at(i) + str.at(i); }
+	for (size_t i = 0; i < space.size() - str.size(); i++) { out += space.at(str.size() + i); }
 
+	return out;
 }
 
 
@@ -201,12 +206,19 @@ int main()
 	//else
 	//	cout << "rien trouver" << endl;
 
-	/*auto retur = plus_longue_sequence(begin(x), end(x), [](int* p) {});
+	auto retur = plus_longue_sequence(begin(x), end(x), [](int p) { return p == 4; });
 	if (retur != make_pair(end(x), end(x)))
-	   cout << *retur.first << " , " << *retur.second << endl;
+		cout << *retur.first << " , " << *retur.second << endl;
 	else
-	   cout << "rien trouver" << endl;*/
+		cout << "rien trouver" << endl;
 
-	cout << inverser_mots("j'aime   mon prof") << endl;
+	//string out = inverser_mots("d 4 s ");
+	//transform(begin(out), end(out), begin(out), [](auto c) {
+	//	if (isspace(c, locale{ "" }))
+	//		return '/';
+	//	else
+	//		return c;
+	//});
+	//cout << out << endl;
 
 }
