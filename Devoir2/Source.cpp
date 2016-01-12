@@ -206,7 +206,7 @@ int main()
 	//else
 	//	cout << "rien trouver" << endl;
 
-	auto retur = plus_longue_sequence(begin(x), end(x), [](int p) { return p == 4; });
+	auto retur = plus_longue_sequence(begin(x), end(x), [](int p) { return p < 45; });
 	if (retur != make_pair(end(x), end(x)))
 		cout << *retur.first << " , " << *retur.second << endl;
 	else
