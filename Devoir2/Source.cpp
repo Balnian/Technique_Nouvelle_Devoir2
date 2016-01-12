@@ -4,31 +4,7 @@
 #include <list>
 #include <locale>
 using namespace std;
-//template<class T>
-//T trouver_consecutifs(T debut, T fin, int n)
-//{
-//   T curCheck = debut;
-//   int count = 1;
-//   
-//   while (debut != fin)
-//   {
-//      ++debut;
-//      if (count == n)
-//         return curCheck;
-//
-//      if (*curCheck != *debut)
-//      {
-//         curCheck = debut;
-//         count = 1;
-//      }
-//      else
-//         count++;
-//      
-//         
-//   }
-//   return fin;
-//   
-//}
+
 template<class T>
 T trouver_consecutifs(T debut, T fin, unsigned int n)
 {
@@ -44,42 +20,6 @@ T trouver_consecutifs(T debut, T fin, unsigned int n)
 	return fin;
 }
 
-
-//template<class T>
-//pair<T,T> plus_longue_sequence(T debut, T fin)
-//{
-//   if (debut == fin)
-//      return make_pair(fin, fin);
-//
-//   T curCheck = debut;
-//   int curCount = 1;
-//
-//   T LongestITbegin = curCheck;
-//   
-//   T LongestITend = next(curCheck);
-//   int LonguestITcount = curCount;
-//
-//   while (debut != fin)
-//   {
-//      ++debut;      
-//      if (curCount > LonguestITcount)
-//      {
-//         LongestITbegin = curCheck;
-//         LongestITend = debut;
-//         LonguestITcount = curCount;
-//      }
-//      if (*curCheck != *debut)
-//      {
-//         curCheck = debut;
-//         curCount = 1;
-//      }
-//      else
-//         curCount++;
-//   }
-//
-//   return make_pair(LongestITbegin, LongestITend);
-//
-//}
 
 template<class T>
 pair<T, T> plus_longue_sequence(T debut, T fin)
@@ -120,41 +60,6 @@ pair<T, T> plus_longue_sequence(T debut, T fin, U pred)
 
 	return make_pair(currdeb, currfin);
 }
-
-//template<class T, class U>
-//pair<T, T> plus_longue_sequence(T debut, T fin,U pred)
-//{
-//   if (debut == fin)
-//      return make_pair(fin, fin);
-//
-//   auto curCount;
-//
-//   T LongestITbegin = curCheck;
-//
-//   T LongestITend = next(curCheck);
-//   auto LonguestITcount = curCount;
-//
-//   T curCheck = debut;
-//
-//   T start ;
-//   T end ;
-//   while (curCheck != fin)
-//   {
-//      start = find_if(curCheck, fin, pred);
-//      end = find_if_not(find_if(curCheck, fin, pred), fin, pred);
-//
-//      curCount = distance(find_if(curCheck, fin, pred), find_if_not(find_if(curCheck, fin, pred),fin,pred));
-//      
-//      if (curCount > LonguestITcount)
-//      {
-//         LongestITbegin = start;
-//         LongestITend = end;
-//      }
-//      curCheck = find_if_not(find_if(curCheck, fin, pred);
-//   }
-//
-//   return make_pair(LongestITbegin, LongestITend);
-//}
 
 
 string inverser_mots(string s)
